@@ -1,7 +1,5 @@
+import { Typography } from '@material-ui/core';
+
 export default function Home() {
-  return (
-    <div>
-      <h1>hello</h1>
-    </div>
-  );
+  return <Typography variant="h1">hello</Typography>;
 }
