@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../theme';
-// import awsconfig from "../src/aws-exports";
+// import awsconfig from '../aws-exports';
 // Amplify.configure(awsconfig);
 
 export default function MyApp({ Component, pageProps }) {
