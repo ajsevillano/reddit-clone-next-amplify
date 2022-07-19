@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Grid, TextField } from '@material-ui/core';
+import { Auth } from 'aws-amplify';
 
 interface IFormInput {
   username: string;
@@ -15,9 +16,30 @@ export default function Signup() {
     handleSubmit,
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data);
+    try {
+      signUpWithEmailAndPassword(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  async function signUpWithEmailAndPassword(data: IFormInput) {
+    const { username, email, password } = data;
+    try {
+      const { user } = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+        },
+      });
+      console.log(user);
+    } catch (error) {
+      console.log('error signing up:', error);
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
